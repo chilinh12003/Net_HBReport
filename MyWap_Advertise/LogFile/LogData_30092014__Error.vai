@@ -1,0 +1,24 @@
+﻿30/09/2014 - 11:40:17 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:40:17 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------
+30/09/2014 - 11:40:42 || cezxp455lmwndw450psvbfr3 || .Net SqlClient Data Provider|   at MySportMillion.Service.WapRegLog.CreateDataSet() in d:\1.Visual Studio\SportMillion\MySportMillion\Service\WapRegLog.cs:line 48
+   at MyLoad_Wap.Advertise.LoadAdvertise.BuildHTML() in d:\1.Visual Studio\HBReport\MyLoad_Wap\Advertise\LoadAdvertise.cs:line 36|Could not find stored procedure 'Sp_WapRegLog_Select'.
+30/09/2014 - 11:40:42 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyLoad\MyLoadBase.cs || GetHTML || 203 || 9 || Could not find stored procedure 'Sp_WapRegLog_Select'. || Xin lỗi, hệ thống hiện tại đang quá tải.<br /> Xin quý khách vui lòng quay lại sau. || Chilinh
+30/09/2014 - 11:40:42 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\HBReport\MyWap_Advertise\Adv\MobileAdv.ashx.cs || WriteHTML || 19 || 17 || Could not find stored procedure 'Sp_WapRegLog_Select'. || Xin lỗi, hệ thống hiện tại đang quá tải.<br /> Xin quý khách vui lòng quay lại sau. || Chilinh
+-----------------------------------------------------------
+30/09/2014 - 11:40:42 || cezxp455lmwndw450psvbfr3 || Could not find stored procedure 'Sp_WapRegLog_Select'.
+30/09/2014 - 11:42:19 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:42:19 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------
+30/09/2014 - 11:43:21 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:43:21 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------
+30/09/2014 - 11:45:21 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:45:21 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------
+30/09/2014 - 11:46:36 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:46:36 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------
+30/09/2014 - 11:47:01 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || get_WurflManager || 48 || 13 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+30/09/2014 - 11:47:01 || cezxp455lmwndw450psvbfr3 || d:\1.Visual Studio\MyLibrary\MyBase\MyWap\MyWapBase.cs || GetDevideInfo || 241 || 17 || Could not find file 'D:\1.Visual Studio\HBReport\MyWap_Advertise\App_Data\wurfl.zip'. ||  || 
+-----------------------------------------------------------

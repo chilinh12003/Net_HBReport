@@ -1,0 +1,17 @@
+﻿07/07/2014 - 10:20:45 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyVOVTraffic\Member.cs || Login || 234 || 9 || A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) || Có lỗi xảy ra trong quá trình đăng nhập! || Chilinh
+07/07/2014 - 10:20:45 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyAdmin\Admin\Ad_Login.aspx.cs || btn_Login_Click || 44 || 17 || A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: Named Pipes Provider, error: 40 - Could not open a connection to SQL Server) || Có lỗi xảy ra trong quá trình đăng nhập! || Chilinh
+-----------------------------------------------------------
+07/07/2014 - 10:43:14 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyVOVTraffic\Gateway\sms_receive_queue.cs || Insert || 54 || 9 || Index and length must refer to a location within the string.
+Parameter name: length || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+07/07/2014 - 10:43:14 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_Register.aspx.cs || tbx_Dereg_Click || 117 || 17 || Index and length must refer to a location within the string.
+Parameter name: length || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+-----------------------------------------------------------
+07/07/2014 - 11:00:32 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyVOVTraffic\Gateway\sms_receive_queue.cs || Insert || 54 || 9 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+07/07/2014 - 11:00:32 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_Register.aspx.cs || tbx_Dereg_Click || 117 || 17 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+-----------------------------------------------------------
+07/07/2014 - 11:01:55 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyVOVTraffic\Gateway\sms_receive_queue.cs || Insert || 54 || 9 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+07/07/2014 - 11:01:55 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_Register.aspx.cs || tbx_Dereg_Click || 117 || 17 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+-----------------------------------------------------------
+07/07/2014 - 11:03:38 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyVOVTraffic\Gateway\sms_receive_queue.cs || Insert || 54 || 9 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+07/07/2014 - 11:03:38 || 0iify23raexzctinp0ozmv45 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_Register.aspx.cs || tbx_Dereg_Click || 117 || 17 || Data too long for column 'MOBILE_OPERATOR' at row 1 || Có lỗi xảy ra trong quá trình lưu dữ liệu! || Chilinh
+-----------------------------------------------------------

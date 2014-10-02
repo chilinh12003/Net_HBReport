@@ -1,0 +1,20 @@
+﻿15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || Admin_Paging1_GetData_Callback_Change || 181 || 9 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || get_Data || 51 || 21 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || BindDa || 163 || 13 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || ResetLoadData || 122 || 13 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || BindData || 40 || 13 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:37:48 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || btn_Search_Click || 231 || 17 || Invalid column name 'ServiceID'.
+Invalid column name 'ReceiveDate'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+-----------------------------------------------------------
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || Admin_Paging1_GetData_Callback_Change || 181 || 9 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || get_Data || 51 || 21 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || BindDa || 163 || 13 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || ResetLoadData || 122 || 13 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || BindData || 40 || 13 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+15/07/2014 - 08:40:26 || ypxpumqiuebgew55ymgx1355 || D:\Projects\SportMillion\Source\MyAdmin\Admin_CCare\Ad_History_Interaction.aspx.cs || btn_Search_Click || 231 || 17 || Invalid column name 'ServiceID'. || Có lỗi xảy ra trong quá trình tìm kiếm! || Chilinh
+-----------------------------------------------------------
