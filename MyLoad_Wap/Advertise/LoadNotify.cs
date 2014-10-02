@@ -5,11 +5,11 @@ using MyBase.MyLoad;
 
 namespace MyLoad_Wap.Advertise
 {
-    public class LoadConfirm:MyLoadBase
+    public class LoadNotify:MyLoadBase
     {
-        public LoadConfirm()
+        public LoadNotify()
         {
-            mTemplatePath = "~/Templates/Static/Register_Confirm.html";
+            mTemplatePath = "~/Templates/Static/Notify.html";
             Init();
         }       
         // Hàm trả về chuỗi có chứa mã HTML

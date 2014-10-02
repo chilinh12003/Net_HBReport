@@ -12,7 +12,17 @@ namespace MyHBReport.Adv
 {
     public class WapRegLog
     {
-          MyExecuteData mExec;
+        public enum Status
+        {
+            [DescriptionAttribute("Nothing")]
+            Nothing = 0,
+            [DescriptionAttribute("Mới tạo")]
+            NewCreate = 1,
+            [DescriptionAttribute("Đã đăng ký")]
+            Registered = 2,
+        }
+
+        MyExecuteData mExec;
         MyGetData mGet;
 
         public WapRegLog()
@@ -53,6 +63,28 @@ namespace MyHBReport.Adv
             {
                 string[] mPara = { "Type", "Para_1" };
                 string[] mValue = { Type.ToString(), Para_1 };
+                return mGet.GetDataTable("Sp_WapRegLog_Select", mPara, mValue);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Type">
+        /// <para>Type = 3: Đếm số thuê bao (Para_1 = BeginDate, Para_2 = EndDate)</para>
+        /// </param>
+        /// <param name="Para_1"></param>
+        /// <param name="Para_2"></param>
+        /// <returns></returns>
+        public DataTable Select(int Type, string Para_1, string Para_2)
+        {
+            try
+            {
+                string[] mPara = { "Type", "Para_1", "Para_2" };
+                string[] mValue = { Type.ToString(), Para_1, Para_2 };
                 return mGet.GetDataTable("Sp_WapRegLog_Select", mPara, mValue);
             }
             catch (Exception ex)
@@ -124,7 +156,5 @@ namespace MyHBReport.Adv
                 throw ex;
             }
         }
-
-
     }
 }

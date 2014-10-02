@@ -52,11 +52,18 @@ namespace MyLoad_Wap.Advertise
                     int.TryParse(CurrentWapBase.Request.QueryString["aid"], out AdvertiseID);
                 }
 
+                if(AdvertiseID < 1)
+                {
+                    LoadNotify mNotify = new LoadNotify();
+                    return mNotify.GetHTML();
+                }
+
                 if (string.IsNullOrEmpty(CurrentWapBase.MSISDN))
                 {
                     GetMSISDN mVNPGet = new GetMSISDN();
                     CurrentWapBase.MSISDN = mVNPGet.GetPhoneNumber();
                 }
+
                 GetAdvertise();
 
                 if (!string.IsNullOrEmpty(CurrentWapBase.MSISDN))
@@ -70,6 +77,7 @@ namespace MyLoad_Wap.Advertise
                     mRow["PID"] = 0;
                     mRow["PartnerID"] = mAdvObj.MapPartnerID;
                     mRow["CreateDate"] = DateTime.Now.ToString(MyConfig.DateFormat_InsertToDB);
+                    mRow["StatusID"] = (int)WapRegLog.Status.NewCreate;
                     mSet.Tables[0].Rows.Add(mRow);
 
                     mWapRegLog.Insert(0, mSet.GetXml());
@@ -84,6 +92,22 @@ namespace MyLoad_Wap.Advertise
                 }
                 else
                 {
+                    if(mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.PassVNPConfirm)
+                    {
+                        WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+                        string BeginDate = (new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day)).ToString(MyConfig.DateFormat_InsertToDB);
+                        string EndDate = (new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,23,59,59)).ToString(MyConfig.DateFormat_InsertToDB);
+
+                        DataTable mTable = mWapRegLog.Select(3, BeginDate, EndDate);
+                        if(mTable != null && mTable.Rows.Count > 0)
+                        {
+                            if((int)mTable.Rows[0][0] > mAdvObj.MaxReg )
+                            {
+                                CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink);
+                            }
+                        }
+                    }
+
                     LoadNotConfirm mLoad = new LoadNotConfirm(mAdvObj.ConfirmLink, mAdvObj.NotConfirmLink, mAdvObj.RedirectDelay);
                     return mLoad.GetHTML();
                 }
@@ -92,8 +116,8 @@ namespace MyLoad_Wap.Advertise
             catch (Exception ex)
             {
                 MyLogfile.WriteLogData("_Error", ex.Source + "|" + ex.StackTrace + "|" + ex.Message);
-                throw ex;
-
+                LoadNotify mNotify = new LoadNotify();
+                return mNotify.GetHTML();
             }
         }
     }

@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advertise\LoadAdvertise.cs" />
-    <Compile Include="Advertise\LoadConfirm.cs" />
+    <Compile Include="Advertise\LoadNotify.cs" />
     <Compile Include="Advertise\LoadNotConfirm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
