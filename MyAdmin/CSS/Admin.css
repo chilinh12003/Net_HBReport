@@ -483,6 +483,8 @@ select, input, label
 .NoiDung table.Data tr td
 {
     text-align:center;
+    padding-left:2px;
+    padding-right:2px;
 }
 .NoiDung table.Data tr td a:hover
 {
@@ -845,7 +847,8 @@ select, input, label
     text-decoration:none;
     background:url("../Images/Icons/Sort_Up.png") no-repeat right center;
     padding-right:13px;
-    float:left;
+    display:inline-block;
+    text-align:center;
 }
 .SortActive_Down
 {
@@ -854,7 +857,8 @@ select, input, label
     text-decoration:none;
     background:url("../Images/Icons/Sort_Down.png") no-repeat right center;
     padding-right:18px;
-    float:left;
+    display:inline-block;
+    text-align:center;
 }
 
 
@@ -884,4 +888,21 @@ select, input, label
     background-color: #FFFFFF;
     text-align: center;
     padding: 5px;
+}
+.wrapping-link {
+    word-break: break-word;
+    word-wrap: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    white-space:pre-line;
+}
+.wrapping-link-inline 
+{
+    word-break: normal;
+    word-wrap: normal;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    hyphens: auto;
+    white-space:nowrap;
 }

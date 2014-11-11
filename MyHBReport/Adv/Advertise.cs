@@ -47,6 +47,13 @@ namespace MyHBReport.Adv
             /// ServiceID trong DB của riêng dịch vụ. lấy trong table Service
             /// </summary>
             public int MapServiceID = 0;
+
+            /// <summary>
+            /// Không cho phép redirect sang VNP
+            /// </summary>
+            public bool NotRedirectToVNP = false;
+
+
             public bool IsNull
             {
                 get
@@ -57,6 +64,8 @@ namespace MyHBReport.Adv
                         return false;
                 }
             }
+
+
 
             public AdvertiseObject Convert(DataRow mRow)
             {
@@ -116,8 +125,11 @@ namespace MyHBReport.Adv
             PassVNPConfirm = 2,
             [DescriptionAttribute("Vượt Confirm Vianphone với TB lần đầu SD")]
             PassVNPConfirmFirstUse = 3,
-            [DescriptionAttribute("Đăng ký trực tiếp qua wap DV")]
-            RegByWap=4,
+            [DescriptionAttribute("DK Confirm qua wap DV")]
+            RegConfirmByWap=4,
+            [DescriptionAttribute("DK Không Confirm qua wap DV")]
+            RegNotConfirmByWap = 5,
+
         }
 
         MyExecuteData mExec;
@@ -169,7 +181,7 @@ namespace MyHBReport.Adv
                 string[] mValue = { Type.ToString() };
 
                 DataTable mTable = new DataTable();
-               
+                mTable = mGet.GetDataTable("Sp_Advertise_Select", mPara, mValue);
                 return mTable;
             }
             catch (Exception ex)
@@ -195,7 +207,8 @@ namespace MyHBReport.Adv
                 string[] mPara = { "Type", "Para_1" };
                 string[] mValue = { Type.ToString(), Para_1 };
 
-                DataTable mTable = new DataTable();              
+                DataTable mTable = new DataTable();
+                mTable = mGet.GetDataTable("Sp_Advertise_Select", mPara, mValue);
                 return mTable;
             }
             catch (Exception ex)

@@ -11,12 +11,14 @@ namespace MyLoad_Wap.Advertise
         public string ConfirmLink = string.Empty;
         public string NotConfirmLink = string.Empty;
         public int RedirectDelay = 0;
+        public string ReloadLink = string.Empty;
 
-        public LoadNotConfirm(string ConfirmLink, string NotConfirmLink, int RedirectDelay)
+        public LoadNotConfirm(string ConfirmLink, string NotConfirmLink, int RedirectDelay, string ReloadLink)
         {
             this.ConfirmLink = ConfirmLink;
             this.NotConfirmLink = NotConfirmLink;
             this.RedirectDelay = RedirectDelay;
+            this.ReloadLink = ReloadLink;
             mTemplatePath = "~/Templates/Static/Register_NotConfirm.html";
             Init();
         }       
@@ -30,6 +32,7 @@ namespace MyLoad_Wap.Advertise
                 HTML = HTML.Replace("{ConfirmLink}", ConfirmLink);
                 HTML = HTML.Replace("{NotConfirmLink}", NotConfirmLink);
                 HTML = HTML.Replace("{RedirectDelay}", RedirectDelay.ToString());
+                HTML = HTML.Replace("{ReloadLink}", ReloadLink);
                 return HTML;
             }
             catch (Exception ex)

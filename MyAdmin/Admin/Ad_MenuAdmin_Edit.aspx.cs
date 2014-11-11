@@ -151,6 +151,7 @@ namespace MyAdmin.Admin
 
                             tbx_Link.Value  = mRow["Link"].ToString();
                             tbx_PageCode.Value = mRow["PageCode"].ToString();
+                            tbx_Priority.Value = mRow["Priority"].ToString();
                        
                             chk_Active.Checked = (bool)mRow["IsActive"];
 

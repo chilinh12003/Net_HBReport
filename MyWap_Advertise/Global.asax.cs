@@ -18,6 +18,7 @@ namespace MyWap_Advertise
         protected void Session_Start(object sender, EventArgs e)
         {
            Session["MSISDN"] = "84919438389";
+            //Session["MSISDN"] = "84912608666";
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)

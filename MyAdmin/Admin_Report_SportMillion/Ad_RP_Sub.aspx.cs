@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
 using MyUtility;
 using MyHBReport.Permission;
 using MySportMillion.Report;
@@ -227,7 +227,7 @@ namespace MyAdmin.Admin_Report_SportMillion
 
                 DateTime BeginDate = tbx_FromDate.Value.Length > 0 ? DateTime.ParseExact(tbx_FromDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
                 DateTime EndDate = tbx_ToDate.Value.Length > 0 ? DateTime.ParseExact(tbx_ToDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
-                int PartnerID = Member.PartnerID();
+                int PartnerID = Member.MapPartnerID();
 
                 return mRP_Sub.TotalRow(SearchType, BeginDate, EndDate, PartnerID);
             }
@@ -249,7 +249,7 @@ namespace MyAdmin.Admin_Report_SportMillion
                 DateTime EndDate = tbx_ToDate.Value.Length > 0 ? DateTime.ParseExact(tbx_ToDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
 
                 PageIndex = (Admin_Paging1.mPaging.CurrentPageIndex - 1) * Admin_Paging1.mPaging.PageSize + 1;
-                int PartnerID = Member.PartnerID();
+                int PartnerID = Member.MapPartnerID();
 
                 return mRP_Sub.Search(SearchType, Admin_Paging1.mPaging.BeginRow, Admin_Paging1.mPaging.EndRow, BeginDate, EndDate, PartnerID, SortBy);
             }

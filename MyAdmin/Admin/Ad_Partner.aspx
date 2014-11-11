@@ -60,6 +60,7 @@
                     <asp:LinkButton runat="server" CssClass="Sort" ID="lbtn_Sort_5" CommandArgument="ParentID ASC" OnClick="lbtn_Sort_Click">ParentID</asp:LinkButton></th>
                  <th>
                     <asp:LinkButton runat="server" CssClass="Sort" ID="lbtn_Sort_6" CommandArgument="Priority ASC" OnClick="lbtn_Sort_Click">Ưu tiên</asp:LinkButton></th>
+                <th>MapPartnerID</th>
                 <th>Active</th>
                 <th align="center" width="10">
                     <input type="checkbox" onclick="SelectCheckBox_All(this);" /></th>
@@ -93,6 +94,9 @@
                         </td>
                         <td>
                             <%#Eval("Priority") %>
+                        </td>
+                        <td>
+                            <%#Eval("MapPartnerID") %>
                         </td>
                         <td>
                             <img src="<%#(((bool)Eval("IsActive"))?"../Images/Buttons/Active_Grid.png":"../Images/Buttons/UnActive_Grid.png") %>" />
@@ -130,6 +134,9 @@
                         </td>
                          <td>
                             <%#Eval("Priority") %>
+                        </td>
+                        <td>
+                            <%#Eval("MapPartnerID") %>
                         </td>
                         <td>
                             <img src="<%#(((bool)Eval("IsActive"))?"../Images/Buttons/Active_Grid.png":"../Images/Buttons/UnActive_Grid.png") %>" />

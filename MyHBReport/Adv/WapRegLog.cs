@@ -92,7 +92,29 @@ namespace MyHBReport.Adv
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Type">
+        /// <para>Type = 4: Đếm số thuê bao (Para_1 = StatusID, Para_2 = BeginDate, Para_3 = EndDate)</para>
+        /// </param>
+        /// <param name="Para_1"></param>
+        /// <param name="Para_2"></param>
+        /// <param name="Para_3"></param>
+        /// <returns></returns>
+        public DataTable Select(int Type, string Para_1, string Para_2, string Para_3)
+        {
+            try
+            {
+                string[] mPara = { "Type", "Para_1", "Para_2","Para_3" };
+                string[] mValue = { Type.ToString(), Para_1, Para_2, Para_3 };
+                return mGet.GetDataTable("Sp_WapRegLog_Select", mPara, mValue);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public bool Insert(int? Type, string XMLContent)
         {
             try

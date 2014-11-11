@@ -146,5 +146,14 @@ namespace MyAdmin.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chk_Active;
+        
+        /// <summary>
+        /// tbx_MapPartnerID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_MapPartnerID;
     }
 }

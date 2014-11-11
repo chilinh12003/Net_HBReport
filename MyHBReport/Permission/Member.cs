@@ -305,6 +305,7 @@ namespace MyHBReport.Permission
                         HttpContext.Current.Session["MemberID"] = mTable.Rows[0]["MemberID"].ToString();
                         HttpContext.Current.Session["LoginName"] = LoginName;
                         HttpContext.Current.Session["PartnerID"] = mTable.Rows[0]["PartnerID"].ToString();
+                        HttpContext.Current.Session["MapPartnerID"] = mTable.Rows[0]["MapPartnerID"].ToString();
                         HttpContext.Current.Session["PartnerTypeID"] = mTable.Rows[0]["PartnerTypeID"].ToString();
 
                     }
@@ -343,6 +344,7 @@ namespace MyHBReport.Permission
                 HttpContext.Current.Session["LoginName"] = string.Empty;
                 HttpContext.Current.Session["MemberGroupID"] = string.Empty;
                 HttpContext.Current.Session["PartnerID"] = string.Empty;
+                HttpContext.Current.Session["MapPartnerID"] = string.Empty;
                 HttpContext.Current.Session["PartnerTypeID"] = string.Empty;
 
                 //Nếu Cookie tồn tại thì xóa cookie đó đi
@@ -400,6 +402,18 @@ namespace MyHBReport.Permission
             {
                 string PartnerID = MyCurrent.CurrentPage.Session["PartnerID"] == null ? "0" : MyCurrent.CurrentPage.Session["PartnerID"].ToString();
                 return int.Parse(PartnerID);
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+        public static int MapPartnerID()
+        {
+            try
+            {
+                string MapPartnerID = MyCurrent.CurrentPage.Session["MapPartnerID"] == null ? "0" : MyCurrent.CurrentPage.Session["MapPartnerID"].ToString();
+                return int.Parse(MapPartnerID);
             }
             catch
             {

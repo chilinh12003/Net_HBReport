@@ -6,15 +6,16 @@ using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using MyUtility;
-using MyMTraffic.Report;
 using MyHBReport.Permission;
-namespace MyAdmin.Admin_Report
+using MyFamousMan.Report;
+
+namespace MyAdmin.Admin_Report_FamousMan
 {
-    public partial class Ad_RP_Sub : System.Web.UI.Page
+    public partial class Ad_RP_Sub_Partner : System.Web.UI.Page
     {
         public GetRole mGetRole;
         public int PageIndex = 1;
-        RP_Sub mRP_Sub = new RP_Sub("SQLConnection_Mtraffic");
+        RP_Sub_Partner mRP_Sub = new RP_Sub_Partner("SQLConnection_FamousMan");
         public DateTime ReportDate_Save = DateTime.MinValue;
         public DateTime ReportDate_Save_Total = DateTime.MinValue;
 
@@ -41,7 +42,7 @@ namespace MyAdmin.Admin_Report
             try
             {
                 if (rpt_Data.DataSource == null)
-                    return string.Empty ;
+                    return string.Empty;
 
                 DataTable mTable = ((DataTable)rpt_Data.DataSource).Copy();
 
@@ -118,7 +119,6 @@ namespace MyAdmin.Admin_Report
             return string.Empty;
         }
 
-
         private void BindCombo(int type)
         {
             try
@@ -168,7 +168,7 @@ namespace MyAdmin.Admin_Report
                 //Phân quyền
                 if (ViewState["Role"] == null)
                 {
-                    mGetRole = new GetRole(MySetting.AdminSetting.ListPage.RP_Sub_MTraffic, Member.MemberGroupID());
+                    mGetRole = new GetRole(MySetting.AdminSetting.ListPage.RP_Sub_FamousMan, Member.MemberGroupID());
                 }
                 else
                 {
@@ -199,6 +199,7 @@ namespace MyAdmin.Admin_Report
 
                 if (!IsPostBack)
                 {
+
                     ViewState["SortBy"] = string.Empty;
 
                     tbx_FromDate.Value = MyConfig.StartDayOfMonth.ToString(MyConfig.ShortDateFormat);
@@ -224,10 +225,9 @@ namespace MyAdmin.Admin_Report
 
                 DateTime BeginDate = tbx_FromDate.Value.Length > 0 ? DateTime.ParseExact(tbx_FromDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
                 DateTime EndDate = tbx_ToDate.Value.Length > 0 ? DateTime.ParseExact(tbx_ToDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
-                int ServiceID = 0;
                 int PartnerID = Member.MapPartnerID();
 
-                return mRP_Sub.TotalRow(SearchType, BeginDate, EndDate, ServiceID, PartnerID);
+                return mRP_Sub.TotalRow(SearchType, BeginDate, EndDate, PartnerID);
             }
             catch (Exception ex)
             {
@@ -247,10 +247,9 @@ namespace MyAdmin.Admin_Report
                 DateTime EndDate = tbx_ToDate.Value.Length > 0 ? DateTime.ParseExact(tbx_ToDate.Value, "dd/MM/yyyy", null) : DateTime.MinValue;
 
                 PageIndex = (Admin_Paging1.mPaging.CurrentPageIndex - 1) * Admin_Paging1.mPaging.PageSize + 1;
-                int ServiceID = 0;
                 int PartnerID = Member.MapPartnerID();
 
-                return mRP_Sub.Search(SearchType, Admin_Paging1.mPaging.BeginRow, Admin_Paging1.mPaging.EndRow, BeginDate, EndDate,ServiceID,PartnerID, SortBy);
+                return mRP_Sub.Search(SearchType, Admin_Paging1.mPaging.BeginRow, Admin_Paging1.mPaging.EndRow, BeginDate, EndDate, PartnerID, SortBy);
             }
             catch (Exception ex)
             {

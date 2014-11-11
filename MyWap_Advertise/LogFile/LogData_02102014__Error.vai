@@ -1,5 +1,0 @@
-﻿02/10/2014 - 15:02:11 || appczfibbfccv0veo023oail || mscorlib|   at System.Threading.Thread.AbortInternal()
-   at System.Threading.Thread.Abort(Object stateInfo)
-   at System.Web.HttpResponse.End()
-   at MyLoad_Wap.Advertise.LoadAdvertise.BuildHTML() in d:\1.Visual Studio\HBReport\MyLoad_Wap\Advertise\LoadAdvertise.cs:line 51|Thread was being aborted.
-02/10/2014 - 15:02:11 || appczfibbfccv0veo023oail || Thread was being aborted.

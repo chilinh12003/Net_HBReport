@@ -2,6 +2,7 @@
 
 <%@ Register Src="../Admin_Control/Admin_Paging.ascx" TagName="Admin_Paging" TagPrefix="uc1" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="cph_Header" runat="server">
+    <script type="text/javascript" src="../Javascript/Hyphenator.js"></script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="cph_Tools" runat="server">
     <a href="javascript:void(0);" onclick="return EditData();" runat="server" id="link_Edit"><span class="Edit"></span>Sửa </a>
@@ -42,11 +43,11 @@
                 </th>
                 <th>Đối tác
                 </th>
-                <th style="width:10%;">ConfirmLink
+                <th style="width:150px;">ConfirmLink
                 </th>
-                <th style="width:10%;">NotConfirmLink
+                <th style="width:150px;">NotConfirmLink
                 </th>
-                <th style="width:10%;">Redirect
+                <th style="width:150px;">Redirect
                 </th>
                 <th>
                     <asp:LinkButton runat="server" CssClass="Sort" ID="lbtn_Sort_3" CommandArgument="BeginDate ASC" OnClick="lbtn_Sort_Click">Bắt đầu</asp:LinkButton>
@@ -86,13 +87,13 @@
                         <td>
                             <%#Eval("PartnerName")%>
                         </td>
-                        <td>
+                        <td class="wrapping-link">
                             <%#Eval("ConfirmLink")%>
                         </td>
-                        <td>
+                       <td class="wrapping-link">
                             <%#Eval("NotConfirmLink")%>
                         </td>
-                        <td>
+                       <td class="wrapping-link">
                             <%#Eval("RedirectLink")%>
                         </td>
                         <td>
@@ -134,13 +135,13 @@
                         <td>
                             <%#Eval("PartnerName")%>
                         </td>
-                        <td>
+                        <td class="wrapping-link">
                             <%#Eval("ConfirmLink")%>
                         </td>
-                        <td>
+                        <td class="wrapping-link">
                             <%#Eval("NotConfirmLink")%>
                         </td>
-                        <td>
+                        <td class="wrapping-link">
                             <%#Eval("RedirectLink")%>
                         </td>
                         <td>
@@ -217,5 +218,8 @@
                 return false;
             }
         }
+
+        Hyphenator.run();
+
     </script>
 </asp:Content>

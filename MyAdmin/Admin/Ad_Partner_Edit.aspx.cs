@@ -136,6 +136,7 @@ namespace MyAdmin.Admin
                             chk_Active.Checked = (bool)mRow["IsActive"];
 
                             tbx_Priority.Value = mRow["Priority"].ToString();
+                            tbx_MapPartnerID.Value = mRow["MapPartnerID"].ToString();
                             if (mRow["ParentID"] != DBNull.Value)
                                 sel_Partner.SelectedIndex = sel_Partner.Items.IndexOf(sel_Partner.Items.FindByValue(mRow["ParentID"].ToString()));
 
@@ -205,7 +206,11 @@ namespace MyAdmin.Admin
                 mNewRow["Priority"] = Priority;
             }
 
-            
+            int MapPartnerID = 0;
+            if (int.TryParse(tbx_MapPartnerID.Value, out MapPartnerID))
+            {
+                mNewRow["MapPartnerID"] = MapPartnerID;
+            }
 
             mSet.Tables["Child"].Rows.Add(mNewRow);
             mSet.AcceptChanges();

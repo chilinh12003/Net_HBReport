@@ -7,11 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyAdmin.Admin_Report_SportMillion
-{
+namespace MyAdmin.Admin_Report_FamousMan {
     
     
-    public partial class Ad_RP_Sub {
+    public partial class Ad_RP_Sub_Partner {
         
         /// <summary>
         /// tbx_FromDate control.

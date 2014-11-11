@@ -13,108 +13,116 @@
     <label>
         Từ ngày:</label>
     <input type="text" runat="server" id="tbx_FromDate" style="width: 70px;" />
-    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_FromDate.ClientID %>'),'dd/mm/yyyy',this)" />
+    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_FromDate.ClientID %>    '),'dd/mm/yyyy',this)" />
     <label>
         Đến ngày:</label>
     <input type="text" runat="server" id="tbx_ToDate" style="width: 70px;" />
-    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_ToDate.ClientID %>'),'dd/mm/yyyy',this)" />
+    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_ToDate.ClientID %>    '),'dd/mm/yyyy',this)" />
     <asp:Button runat="server" ID="btn_Search" Text="Tìm kiếm" OnClick="btn_Search_Click" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cph_Content" runat="server">
     <table class="Data" border="0" cellpadding="0" cellspacing="0">
-        <tbody>
-            <tr class="Table_Header">
-                <th class="Table_TL border-none"></th>
-                <th class="last " rowspan="2">STT</th>
-                <th class="last" rowspan="2">Ngày</th>
-                <th class="last" rowspan="2">Đối tác</th>
-                <th colspan="6">Đăng ký</th>
-                <th colspan="5">Hủy</th>
-                <th colspan="4">Gia hạn</th>
-                <th colspan="4">Doanh thu</th>
-                <th class="Table_TR border-none"></th>
-            </tr>
-            <tr class="Table_Header">
-                <th class="Table_TL_Repeat last border-none"></th>
-                <th class="last">Tổng</th>
-                <th class="last">Kích hoạt</th>
-                <th class="last">Mới</th>
-                <th class="last">SMS</th>
-                <th class="last">WAP</th>
-                <th class="last">Other</th>
-                <th class="last">Tổng</th>
-                <th class="last">Mới</th>
-                <th class="last">Tự hủy</th>
-                <th class="last">MaxRetry</th>
-                <th class="last">Other</th>
-                <th class="last">Tổng</th>
-                <th class="last">Thành Công</th>
-                <th class="last">Thất bại</th>
-                <th class="last">Tỷ lệ (%)</th>
-                <th class="last">Đăng ký</th>
-                <th class="last">Gia hạn</th>
-                <th class="last">Tổng</th>
-                <th class="last" style="color: Red;">TỔNG TIỀN</th>
-                <th class="Table_TR_Repeat last border-none"></th>
-            </tr>
-            <asp:Repeater runat="server" ID="rpt_Data">
-                <ItemTemplate>
-                    <tr class="Table_Row_1">
-                        <td class="Table_ML_1 border-none"></td>
-                        <td><%#(Container.ItemIndex + PageIndex).ToString()%></td>
-                        <%#this.GetReport_HTML((DateTime)Eval("ReportDay"))%>
-                        <td><%# Eval("PartnerName").ToString()%></td>
-                        <td><%#((double)Eval("SubTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubNew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubSMS")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubNew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubSelf")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubExtend")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewSuccess")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewFail")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewRate")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleReg")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleRenew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleReg") + (double)Eval("SaleRenew") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <%#this.GetTotalMoneyByDay_HTML((DateTime)Eval("ReportDay"))%>
-                        <td class="Table_MR_1 border-none"></td>
-                    </tr>
-                </ItemTemplate>
-                <AlternatingItemTemplate>
-                    <tr class="Table_Row_2">
-                        <td class="Table_ML_2 border-none"></td>
-                        <td><%#(Container.ItemIndex + PageIndex).ToString()%></td>
-                        <%#this.GetReport_HTML((DateTime)Eval("ReportDay"))%>
-                        <td><%# Eval("PartnerName").ToString()%></td>
-                        <td><%#((double)Eval("SubTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubNew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubSMS")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubNew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubSelf")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubExtend")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("UnsubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewSuccess")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewFail")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("RenewRate")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleReg")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleRenew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <td><%#((double)Eval("SaleReg") + (double)Eval("SaleRenew") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                        <%#this.GetTotalMoneyByDay_HTML((DateTime)Eval("ReportDay"))%>
-                        <td class="Table_MR_2 border-none"></td>
-                    </tr>
-                </AlternatingItemTemplate>
-            </asp:Repeater>
+        <tr class="Table_Header">
+            <th class="Table_TL border-none"></th>
+            <th class="last " rowspan="2">STT</th>
+            <th class="last" rowspan="2">Ngày</th>
+            <th class="last" rowspan="2">Đối tác</th>
+            <th colspan="6">Đăng ký</th>
+            <th colspan="5">Hủy</th>
+            <th colspan="8">Gia hạn</th>
+            <th colspan="3">Doanh thu</th>
+            <th class="Table_TR border-none"></th>
+        </tr>
+        <tr class="Table_Header">
+            <th class="Table_TL_Repeat last border-none"></th>
+            <th class="last">Tổng</th>
+            <th class="last">Kích hoạt</th>
+            <th class="last">Mới</th>
+            <th class="last">SMS</th>
+            <th class="last">WAP</th>
+            <th class="last">Other</th>
+            <th class="last">Tổng</th>
+            <th class="last">Mới</th>
+            <th class="last">Tự hủy</th>
+            <th class="last">MaxRetry</th>
+            <th class="last">Other</th>
+            <th class="last">Tổng</th>
+            <th class="last">Thành Công</th>
+            <th class="last">5000</th>
+            <th class="last">3000</th>
+            <th class="last">1000</th>
+            <th class="last">Thất bại</th>
+            <th class="last">Tỷ lệ (%)</th>
+            <th class="last">Đăng ký</th>
+            <th class="last">Gia hạn</th>
+            <th class="last">Tổng</th>
+            <th class="last" style="color: Red;">TỔNG TIỀN</th>
+            <th class="Table_TR_Repeat last border-none"></th>
+        </tr>
+        <asp:Repeater runat="server" ID="rpt_Data">
+            <ItemTemplate>
+                <tr class="Table_Row_1">
+                    <td class="Table_ML_1 border-none"></td>
+                    <td><%#(Container.ItemIndex + PageIndex).ToString()%></td>
+                    <%#this.GetReport_HTML((DateTime)Eval("ReportDay"))%>
+                    <td><%# Eval("PartnerName").ToString()%></td>
+                    <td><%#((double)Eval("SubTotal")+(double)Eval("SubTotal_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubNew") +(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubSMS")+(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubTotal")+(double)Eval("UnsubTotal_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubNew")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubSelf")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubExtend")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewSuccess")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew5000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew3000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew1000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewFail")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewRate")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleReg")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleRenew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleReg") + (double)Eval("SaleRenew") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <%#this.GetTotalMoneyByDay_HTML((DateTime)Eval("ReportDay"))%>
+                    <td class="Table_MR_1 border-none"></td>
+                </tr>
+            </ItemTemplate>
+            <AlternatingItemTemplate>
+                <tr class="Table_Row_2">
+                    <td class="Table_ML_2 border-none"></td>
+                    <td><%#(Container.ItemIndex + PageIndex).ToString()%></td>
+                    <%#this.GetReport_HTML((DateTime)Eval("ReportDay"))%>
+                    <td><%# Eval("PartnerName").ToString()%></td>
+                    <td><%#((double)Eval("SubTotal")+(double)Eval("SubTotal_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubNew") +(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubSMS")+(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubTotal")+(double)Eval("UnsubTotal_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubNew")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubSelf")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubExtend")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("UnsubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewTotal")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewSuccess")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew5000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew3000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("Renew1000")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewFail")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("RenewRate")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleReg")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleRenew")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SaleReg") + (double)Eval("SaleRenew") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <%#this.GetTotalMoneyByDay_HTML((DateTime)Eval("ReportDay"))%>
+                    <td class="Table_MR_2 border-none"></td>
+                </tr>
+            </AlternatingItemTemplate>
+        </asp:Repeater>
     </table>
     <div class="Table_Footer">
         <div class="Table_BL">
@@ -126,4 +134,3 @@
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="cph_Javascript" runat="server">
 </asp:Content>
-

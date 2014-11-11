@@ -66,15 +66,13 @@
   <ItemGroup>
     <Content Include="Adv\MobileAdv.ashx" />
     <Content Include="App_Data\wurfl.zip" />
+    <Content Include="Adv\AjaxLog.ashx" />
     <None Include="Properties\PublishProfiles\MyWap_Advertise.pubxml" />
-    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="App_Data\web_browsers_patch.xml" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Scripts\jquery-2.1.1.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.js" />
-    <Content Include="Scripts\jquery-2.1.1.min.map" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -84,6 +82,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\MyScript.js" />
+    <Content Include="Scripts\MyScript_Ajax.js" />
+    <Content Include="Templates\HtmlPage1.html" />
+    <Content Include="Templates\Static\Register_NotConfirm_Ajax.html" />
     <Content Include="Templates\Static\Register_NotConfirm.html" />
     <Content Include="Templates\Static\Notify.html" />
     <Content Include="Web.config">
@@ -91,6 +93,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adv\AjaxLog.ashx.cs">
+      <DependentUpon>AjaxLog.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Adv\MobileAdv.ashx.cs">
       <DependentUpon>MobileAdv.ashx</DependentUpon>
     </Compile>

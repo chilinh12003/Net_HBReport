@@ -58,6 +58,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\AntiXSS Library v4.2\NET35\AntiXSSLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MyFamousMan">
+      <HintPath>..\..\FamousMan\MyVOVTraffic\bin\Debug\MyFamousMan.dll</HintPath>
+    </Reference>
     <Reference Include="MyMTraffic">
       <HintPath>..\..\MTraffic\MyMTraffic\bin\Debug\MyMTraffic.dll</HintPath>
     </Reference>
@@ -108,6 +111,7 @@
     <Content Include="Admin_Control\Admin_Paging_VNP.ascx" />
     <Content Include="Admin_Report\Ad_MOByDay.aspx" />
     <Content Include="Admin_Report\Ad_MOByPhoneNumber.aspx" />
+    <Content Include="Admin_Report_FamousMan\Ad_RP_Sub_Partner.aspx" />
     <Content Include="Admin_Report_Mtraffic\Ad_RP_Sub.aspx" />
     <Content Include="Admin_Report_SportMillion\Ad_RP_Sub.aspx" />
     <Content Include="App_Data\AllowIP.xml" />
@@ -294,6 +298,13 @@
     </Compile>
     <Compile Include="Admin_Report\Ad_MOByPhoneNumber.aspx.designer.cs">
       <DependentUpon>Ad_MOByPhoneNumber.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin_Report_FamousMan\Ad_RP_Sub_Partner.aspx.cs">
+      <DependentUpon>Ad_RP_Sub_Partner.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin_Report_FamousMan\Ad_RP_Sub_Partner.aspx.designer.cs">
+      <DependentUpon>Ad_RP_Sub_Partner.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin_Report_Mtraffic\Ad_RP_Sub.aspx.cs">
       <DependentUpon>Ad_RP_Sub.aspx</DependentUpon>

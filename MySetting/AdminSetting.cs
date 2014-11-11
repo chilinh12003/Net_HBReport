@@ -62,6 +62,9 @@ namespace MySetting
             [DescriptionAttribute("Thống kê thuê bao Triệu phú thể thao")]
             RP_Sub_SportMillion,
 
+            [DescriptionAttribute("Thống kê thuê bao Người nổi tiếng")]
+            RP_Sub_FamousMan,
+
             //Quảng cáo
             [DescriptionAttribute("Dịch vụ")]
             Adv_Service,

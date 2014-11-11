@@ -90,6 +90,12 @@
         <div class="Edit_Control">
             <input type="checkbox" runat="server" checked="checked" id="chk_Active" />
         </div>
+         <div class="Edit_Title">
+            MapPartnerID
+        </div>
+        <div class="Edit_Control">
+            <input type="text" runat="server" id="tbx_MapPartnerID" value="0" onkeypress="return isNumberKey_int(event);" />
+        </div>
     </div>
     <div class="Edit_Right">
     </div>

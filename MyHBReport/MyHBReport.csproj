@@ -78,6 +78,8 @@
   <ItemGroup>
     <Compile Include="Adv\Advertise.cs" />
     <Compile Include="Adv\Service.cs" />
+    <Compile Include="Adv\UnSubscriber.cs" />
+    <Compile Include="Adv\Subscriber.cs" />
     <Compile Include="Adv\WapRegLog.cs" />
     <Compile Include="News\Article.cs" />
     <Compile Include="News\Category.cs" />
