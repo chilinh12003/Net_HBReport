@@ -16,6 +16,7 @@ namespace Administrator.Admin
     public partial class Ad_Member_Edit : System.Web.UI.Page
     {
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_Member_Edit));
         Member mMember = new Member();
 
         int EditID = 0;
@@ -55,7 +56,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -83,7 +84,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -152,7 +153,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
 
         }
@@ -203,7 +204,8 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.UploadFileError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.UploadFileError, true, ex);
+                
             }
         }
 
@@ -332,7 +334,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SaveDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SaveDataError, true, ex);
             }
         }
 
@@ -344,7 +346,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SaveDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SaveDataError, true, ex);
             }
         }
     }

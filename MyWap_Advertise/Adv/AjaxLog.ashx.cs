@@ -11,6 +11,7 @@ namespace MyWap_Advertise.Adv
     public class AjaxLog : IHttpHandler, IRequiresSessionState
     {
 
+        MyLog mLog = new MyLog(typeof(AjaxLog));
         public void ProcessRequest(HttpContext context)
         {
             try
@@ -18,17 +19,17 @@ namespace MyWap_Advertise.Adv
                 string Para = context.Request.QueryString["para"];
                 if(string.IsNullOrEmpty(Para))
                 {
-                    MyLogfile.WriteLogData("_Script", "Para:null");
+                    mLog.Debug( "Para:null");
                 }
                 else
-                    MyLogfile.WriteLogData("_Script", "Para:"+Para);
+                    mLog.Debug( "Para:"+Para);
 
                 context.Response.ContentType = "text/plain";
                 context.Response.Write("Hello World");
             }
             catch(Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog .Error(ex);
             }
         }
 

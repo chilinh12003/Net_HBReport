@@ -14,6 +14,8 @@ namespace MyAdmin.Admin
 {
     public partial class Ad_Login : System.Web.UI.Page
     {
+
+        MyLog mLog = new MyLog(typeof(Ad_Login));
         string PrevURL = string.Empty;
         public string AlertMessage = "Xin hãy kiểm tra lại Tăng đăng nhập hoặc Mật khẩu.";
 
@@ -60,7 +62,8 @@ namespace MyAdmin.Admin
             }
             catch(Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
+                
             }
         }
 
@@ -102,7 +105,7 @@ namespace MyAdmin.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoginError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoginError, true, ex);
             }
         }
     }

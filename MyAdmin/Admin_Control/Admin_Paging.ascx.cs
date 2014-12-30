@@ -14,6 +14,7 @@ namespace MyAdmin.Admin_Control
     public partial class Admin_Paging : System.Web.UI.UserControl
     {
         Repeater _rpt_Data;
+        MyLog mLog = new MyLog(typeof(Admin_Paging));
         public Repeater rpt_Data
         {
             get { return _rpt_Data; }
@@ -113,7 +114,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
         public void ResetLoadData()
@@ -175,7 +176,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_Prevous_Click(object sender, EventArgs e)
@@ -189,7 +190,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_SlidePrev_Click(object sender, EventArgs e)
@@ -203,7 +204,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_1_Click(object sender, EventArgs e)
@@ -217,7 +218,8 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
+                
             }
         }
         protected void lbtn_2_Click(object sender, EventArgs e)
@@ -231,7 +233,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_3_Click(object sender, EventArgs e)
@@ -245,7 +247,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_SlideNext_Click(object sender, EventArgs e)
@@ -258,7 +260,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_Next_Click(object sender, EventArgs e)
@@ -271,7 +273,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
         protected void lbtn_Last_Click(object sender, EventArgs e)
@@ -284,7 +286,7 @@ namespace MyAdmin.Admin_Control
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.PagingError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.PagingError, true, ex);
             }
         }
 

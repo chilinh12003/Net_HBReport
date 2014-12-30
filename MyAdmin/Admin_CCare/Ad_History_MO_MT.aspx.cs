@@ -14,6 +14,7 @@ namespace MyAdmin.Admin_CCare
     {
 
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_History_MO_MT));
 
         public int PageIndex = 1;
 
@@ -29,7 +30,7 @@ namespace MyAdmin.Admin_CCare
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
             }
             return true;
         }
@@ -92,7 +93,7 @@ namespace MyAdmin.Admin_CCare
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -116,7 +117,7 @@ namespace MyAdmin.Admin_CCare
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -167,7 +168,7 @@ namespace MyAdmin.Admin_CCare
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -200,7 +201,7 @@ namespace MyAdmin.Admin_CCare
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SortError, "Chilinh");
+               mLog.Error(MyNotice.AdminError.SortError, true, ex);
             }
         }
     }

@@ -13,6 +13,7 @@ namespace MyAdmin.Admin_Adv
     public partial class Ad_Service : System.Web.UI.Page
     {
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_Service));
         public int PageIndex = 1;
 
         Service mData = new Service();
@@ -58,7 +59,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -86,7 +87,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -114,7 +115,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -204,7 +205,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SortError, "Chilinh");
+               mLog.Error(MyNotice.AdminError.SortError, true, ex);
             }
         }
 
@@ -253,7 +254,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.DeleteDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.DeleteDataError, true, ex);
             }
         }
 
@@ -265,7 +266,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SeachError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SeachError, true, ex);
             }
         }
 
@@ -326,7 +327,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.ActiveError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.ActiveError, true, ex);
             }
         }
 
@@ -339,7 +340,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.ActiveError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.ActiveError, true, ex);
             }
         }
 
@@ -352,7 +353,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
     }

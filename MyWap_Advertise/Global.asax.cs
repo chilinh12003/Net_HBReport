@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.SessionState;
@@ -17,7 +16,7 @@ namespace MyWap_Advertise
 
         protected void Session_Start(object sender, EventArgs e)
         {
-           Session["MSISDN"] = "84919438389";
+            //Session["MSISDN"] = "84919438389";
             //Session["MSISDN"] = "84912608666";
         }
 

@@ -13,6 +13,7 @@ namespace MyAdmin.Admin_Adv
     public partial class Ad_Advertise_Edit : System.Web.UI.Page
     {
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_Advertise_Edit));
         Advertise mData = new Advertise();
         int EditID = 0;
 
@@ -129,7 +130,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -157,7 +158,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -223,10 +224,16 @@ namespace MyAdmin.Admin_Adv
                             tbx_ConfirmLink.Value = mRow["ConfirmLink"].ToString();
                             tbx_NotConfirmLink.Value = mRow["NotConfirmLink"].ToString();
                             tbx_RedirectLink.Value = mRow["RedirectLink"].ToString();
+                            tbx_PassLink.Value = mRow["PassLink"].ToString();
+                            tbx_UsedLink.Value = mRow["UsedLink"].ToString();
+                            tbx_LogMSISDNLink.Value = mRow["LogMSISDNLink"].ToString();
 
                             tbx_MaxReg.Value = mRow["MaxReg"].ToString();
                             tbx_MapPartnerID.Value = mRow["MapPartnerID"].ToString();
                             tbx_RedirectDelay.Value = mRow["RedirectDelay"].ToString();
+
+                            tbx_MaxRequest.Value = mRow["MaxRequest"].ToString();
+                            tbx_PassPercent.Value = mRow["PassPercent"].ToString();
 
                             if (mRow["BeginDate"] != DBNull.Value)
                             {
@@ -251,7 +258,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
 
         }
@@ -287,8 +294,11 @@ namespace MyAdmin.Admin_Adv
 
             mNewRow["ConfirmLink"] = tbx_ConfirmLink.Value;
             mNewRow["NotConfirmLink"] = tbx_NotConfirmLink.Value;
-            mNewRow["RedirectLink"] = tbx_RedirectLink.Value; 
-            
+            mNewRow["RedirectLink"] = tbx_RedirectLink.Value;
+            mNewRow["PassLink"] = tbx_PassLink.Value;
+            mNewRow["UsedLink"] = tbx_UsedLink.Value;
+            mNewRow["LogMSISDNLink"] = tbx_LogMSISDNLink.Value; 
+
             int MaxReg = 0;
             if (int.TryParse(tbx_MaxReg.Value, out MaxReg))
             {
@@ -305,6 +315,19 @@ namespace MyAdmin.Admin_Adv
             if (int.TryParse(tbx_RedirectDelay.Value, out RedirectDelay))
             {
                 mNewRow["RedirectDelay"] = RedirectDelay;
+            }
+            
+								
+            int MaxRequest = 0;
+            if (int.TryParse(tbx_MaxRequest.Value, out MaxRequest))
+            {
+                mNewRow["MaxRequest"] = MaxRequest;
+            }
+
+            int PassPercent = 0;
+            if (int.TryParse(tbx_PassPercent.Value, out PassPercent))
+            {
+                mNewRow["PassPercent"] = PassPercent;
             }
 
             if (tbx_BeginDate.Value.Length > 0)
@@ -408,7 +431,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SaveDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SaveDataError, true, ex);
             }
         }
 
@@ -420,7 +443,7 @@ namespace MyAdmin.Admin_Adv
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SaveDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SaveDataError, true, ex);
             }
         }
 

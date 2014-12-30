@@ -51,9 +51,9 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
@@ -67,6 +67,10 @@
     <Content Include="Adv\MobileAdv.ashx" />
     <Content Include="App_Data\wurfl.zip" />
     <Content Include="Adv\AjaxLog.ashx" />
+    <Content Include="Adv\RegLog.ashx" />
+    <Content Include="Adv\RegVNP.ashx" />
+    <Content Include="Adv\GetMSISDN.ashx" />
+    <Content Include="Adv\RegPartner.ashx" />
     <None Include="Properties\PublishProfiles\MyWap_Advertise.pubxml" />
     <Content Include="App_Data\web_browsers_patch.xml" />
     <Content Include="Default.aspx" />
@@ -82,9 +86,12 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Scripts\jquery.xdomainrequest.min.js" />
     <Content Include="Scripts\MyScript.js" />
     <Content Include="Scripts\MyScript_Ajax.js" />
     <Content Include="Templates\HtmlPage1.html" />
+    <Content Include="Templates\Static\RegPartner.html" />
+    <Content Include="Templates\Static\RegVNP.html" />
     <Content Include="Templates\Static\Register_NotConfirm_Ajax.html" />
     <Content Include="Templates\Static\Register_NotConfirm.html" />
     <Content Include="Templates\Static\Notify.html" />
@@ -96,8 +103,21 @@
     <Compile Include="Adv\AjaxLog.ashx.cs">
       <DependentUpon>AjaxLog.ashx</DependentUpon>
     </Compile>
+    <Compile Include="Adv\GetMSISDN.ashx.cs">
+      <DependentUpon>GetMSISDN.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Adv\MobileAdv.ashx.cs">
       <DependentUpon>MobileAdv.ashx</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Adv\RegLog.ashx.cs">
+      <DependentUpon>RegLog.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Adv\RegPartner.ashx.cs">
+      <DependentUpon>RegPartner.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Adv\RegVNP.ashx.cs">
+      <DependentUpon>RegVNP.ashx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

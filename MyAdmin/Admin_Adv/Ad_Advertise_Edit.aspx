@@ -66,6 +66,24 @@
         <div class="Edit_Control">
             <input type="text" runat="server" id="tbx_RedirectLink" style="width: 100%;" />
         </div>
+         <div class="Edit_Title">
+            Link Pass
+        </div>
+        <div class="Edit_Control">
+            <input type="text" runat="server" id="tbx_PassLink" style="width: 100%;" />
+        </div>
+        <div class="Edit_Title">
+            Used Link
+        </div>
+        <div class="Edit_Control">
+            <input type="text" runat="server" id="tbx_UsedLink" style="width: 100%;" />
+        </div>
+        <div class="Edit_Title">
+            Log MSISDN Link
+        </div>
+        <div class="Edit_Control">
+            <input type="text" runat="server" id="tbx_LogMSISDNLink" style="width: 100%;" />
+        </div>
         <div class="Edit_Title">
             Ngày bắt đầu
         </div>
@@ -136,6 +154,18 @@
             </div>
             <div class="Properties_Control">
                 <input type="text" runat="server" id="tbx_RedirectDelay" value="0" onkeypress="return isNumberKey_int(event);" />
+            </div>
+            <div class="Properties_Title">
+                MaxRequest
+            </div>
+            <div class="Properties_Control">
+                <input type="text" runat="server" id="tbx_MaxRequest" value="0" onkeypress="return isNumberKey_int(event);" />
+            </div>
+            <div class="Properties_Title">
+                PassPercent
+            </div>
+            <div class="Properties_Control">
+                <input type="text" runat="server" id="tbx_PassPercent" value="0" onkeypress="return isNumberKey_int(event);" />
             </div>
         </div>
     </div>

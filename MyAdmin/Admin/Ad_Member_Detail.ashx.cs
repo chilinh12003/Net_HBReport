@@ -17,6 +17,7 @@ namespace MyAdmin.Admin
     public class Ad_Member_Detail : IHttpHandler, IRequiresSessionState
     {
 
+        MyLog mLog = new MyLog(typeof(Ad_Member_Detail));
         public void ProcessRequest(HttpContext context)
         {
             int MemberID = context.Request.QueryString["ID"] == null ? 0 : int.Parse(context.Request.QueryString["ID"]);
@@ -79,7 +80,7 @@ namespace MyAdmin.Admin
             catch (Exception ex)
             {
                 context.Response.Write("<div class='FaceBoxAlert_UnSuccess'>Có lỗi trong quá trình tải dữ liệu!</div>");
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 

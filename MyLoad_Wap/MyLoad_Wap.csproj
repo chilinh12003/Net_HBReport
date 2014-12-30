@@ -47,8 +47,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Advertise\LoadAdvertise.cs" />
+    <Compile Include="Advertise\LoadGetMSISDN.cs" />
     <Compile Include="Advertise\LoadNotify.cs" />
     <Compile Include="Advertise\LoadNotConfirm.cs" />
+    <Compile Include="Advertise\LoadRegLog.cs" />
+    <Compile Include="Advertise\LoadRegPartner.cs" />
+    <Compile Include="Advertise\LoadRegVNP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -14,6 +14,7 @@ namespace MyAdmin.Admin_Report_FamousMan
     public partial class Ad_RP_Sub_Partner : System.Web.UI.Page
     {
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_RP_Sub_Partner));
         public int PageIndex = 1;
         RP_Sub_Partner mRP_Sub = new RP_Sub_Partner("SQLConnection_FamousMan");
         public DateTime ReportDate_Save = DateTime.MinValue;
@@ -70,7 +71,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
             }
             return string.Empty;
         }
@@ -114,7 +115,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
             }
             return string.Empty;
         }
@@ -154,7 +155,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -182,7 +183,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -212,7 +213,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -287,7 +288,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SortError, "Chilinh");
+               mLog.Error(MyNotice.AdminError.SortError, true, ex);
             }
         }
 
@@ -299,7 +300,7 @@ namespace MyAdmin.Admin_Report_FamousMan
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SeachError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SeachError, true, ex);
             }
         }
 

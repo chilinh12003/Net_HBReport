@@ -4,31 +4,18 @@ var NotConfirmLink = "";
 var RedirectDelay = 0;
 var Domain = "";
 var ConfirmLink = "";
-var ReloadLink = "";
 
 $(document).ready(function ()
 {
     try
     {
-        debugger;
         $("#ifload").load(function ()
         {
-            debugger;
             $("#ifload").css({
                 "width": $(window).outerWidth() + "px",
                 "height": $(window).outerHeight() + "px"
             });
-            /*
-            if ($("#ifload").attr("src") == ConfirmLink && ReloadLink != "")
-            {
-                setTimeout(function ()
-                {
-                    Redirect(ReloadLink);
-                    //$("#ifload").attr("src", NotConfirmLink);
-                }, RedirectDelay);
-            }
-            else
-            */
+
              if ($("#ifload").attr("src") == ConfirmLink)
             {
                 setTimeout(function ()

@@ -1,5 +1,0 @@
-﻿23/08/2014 - 21:19:05 || 5atxnw55pdzmnb553c5oh345 || D:\Projects\HBReport\Source\MyAdmin\Admin_Report_Mtraffic\Ad_RP_Sub.aspx.cs || Admin_Paging1_GetData_Callback_Change || 263 || 9 || Field not found: 'ParaSave.Partner'. || Có lỗi xảy ra trong quá trình phân trang! || Chilinh
-23/08/2014 - 21:19:05 || 5atxnw55pdzmnb553c5oh345 || D:\Projects\HBReport\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || get_Data || 51 || 21 || Field not found: 'ParaSave.Partner'. || Có lỗi xảy ra trong quá trình phân trang! || Chilinh
-23/08/2014 - 21:19:05 || 5atxnw55pdzmnb553c5oh345 || D:\Projects\HBReport\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || BindDa || 163 || 13 || Field not found: 'ParaSave.Partner'. || Có lỗi xảy ra trong quá trình phân trang! || Chilinh
-23/08/2014 - 21:19:05 || 5atxnw55pdzmnb553c5oh345 || D:\Projects\HBReport\Source\MyAdmin\Admin_Control\Admin_Paging.ascx.cs || lbtn_First_Click || 174 || 17 || Field not found: 'ParaSave.Partner'. || Có lỗi xảy ra trong quá trình phân trang! || Chilinh
------------------------------------------------------------

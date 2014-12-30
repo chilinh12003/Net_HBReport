@@ -8,10 +8,12 @@ using System.Data;
 using MyUtility;
 using MyHBReport.Adv;
 using System.Web;
+using System.Net;
 namespace MyLoad_Wap.Advertise
 {
     public class LoadAdvertise : MyLoadBase
     {
+
         int AdvertiseID = 0;
         DateTime ReloadTime = DateTime.MinValue;
 
@@ -27,6 +29,7 @@ namespace MyLoad_Wap.Advertise
         {
             this.CurrentWapBase = CurrentWapBase;
             Init();
+            
         }
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace MyLoad_Wap.Advertise
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
                 throw ex;
             }
         }
@@ -59,38 +62,7 @@ namespace MyLoad_Wap.Advertise
                 if (!string.IsNullOrEmpty(CurrentWapBase.Request.QueryString["aid"]))
                 {
                     int.TryParse(CurrentWapBase.Request.QueryString["aid"], out AdvertiseID);
-                }
-
-                if (!string.IsNullOrEmpty(CurrentWapBase.Request.QueryString["para"]))
-                {
-                    string Para = CurrentWapBase.Request.QueryString["para"];
-                    if(!string.IsNullOrEmpty(Para))
-                    {
-                        string Para_Decode = MySecurity.AES.Decrypt(Para,MySetting.AdminSetting.SpecialKey);
-                        DateTime.TryParseExact(Para_Decode, "yyyyMMddHHmmss", null, System.Globalization.DateTimeStyles.None, out ReloadTime);
-                    }
-                    if(ReloadTime == DateTime.MinValue)
-                    {
-                        LoadNotify mNotify = new LoadNotify();
-                        return mNotify.GetHTML();
-                    }
-                    if((DateTime.Now - ReloadTime).TotalSeconds > MaxDelay)
-                    {
-                        LoadNotify mNotify = new LoadNotify();
-                        return mNotify.GetHTML();
-                    }
-
-                    ReloadLink = string.Empty;
-
-                }
-                else
-                {
-                    string Para = MySecurity.AES.Encrypt(DateTime.Now.ToString("yyyyMMddHHmmss"),MySetting.AdminSetting.SpecialKey);
-                    Para = HttpUtility.UrlEncode(Para);
-
-                    ReloadLink = MyConfig.Domain + "/MobileAdv.html?aid=" + AdvertiseID.ToString() + "&para=" + Para;
-                }
-                
+                }         
 
                 if (AdvertiseID < 1)
                 {
@@ -106,52 +78,77 @@ namespace MyLoad_Wap.Advertise
 
                 GetAdvertise();
 
-                if (!string.IsNullOrEmpty(CurrentWapBase.MSISDN))
+                if(mAdvObj.IsNull)
                 {
-                    WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+                    LoadNotify mNotify = new LoadNotify();
+                    return mNotify.GetHTML();
+                }
 
-                    DataSet mSet = mWapRegLog.CreateDataSet();
-                    MyConvert.ConvertDateColumnToStringColumn(ref mSet);
-                    DataRow mRow = mSet.Tables[0].NewRow();
-                    mRow["MSISDN"] = CurrentWapBase.MSISDN;
-                    mRow["PID"] = 0;
-                    mRow["PartnerID"] = mAdvObj.MapPartnerID;
-                    mRow["CreateDate"] = DateTime.Now.ToString(MyConfig.DateFormat_InsertToDB);
-                    mRow["StatusID"] = (int)WapRegLog.Status.NewCreate;
-                    mSet.Tables[0].Rows.Add(mRow);
-
-                    mWapRegLog.Insert(0, mSet.GetXml());
+                if (mAdvObj.mStatus != MyHBReport.Adv.Advertise.Status.Active)
+                {
+                    CurrentWapBase.Response.Redirect(mAdvObj.GetRedirectLink, false);
+                    return string.Empty;
                 }
 
                 //nếu không có số điện thoại hoặc browser trên desktop thì chuyển sang VNP confirm
                 if (string.IsNullOrEmpty(CurrentWapBase.MSISDN))
                 {
-                    MyLogfile.WriteLogData("_adv", "Step_1_NO_MSISDN:Redirect:" + mAdvObj.ConfirmLink);
-                    CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink,false);
+                    CurrentWapBase.Response.Redirect(mAdvObj.GetRedirectLink, false);
                     return string.Empty;
                 }
-                //else if (CurrentWapBase.CheckDevice(MyConfig.DeviceType.is_full_desktop))
+
+                //if (CurrentWapBase.CheckDevice(MyConfig.DeviceType.is_full_desktop))
                 //{
                 //    MyLogfile.WriteLogData("_adv", "Step_1_is_full_desktop:Redirect:" + mAdvObj.ConfirmLink);
-                //    CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
+                //    CurrentWapBase.Response.Redirect(mAdvObj.GetRedirectLink, false);
                 //    return string.Empty;
-                //}
-                else if (mAdvObj.mStatus != MyHBReport.Adv.Advertise.Status.Active)
+                //} 
+
+                WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+
+                //nếu cấu hình số lần request thì sẽ xử lý
+                if(mAdvObj.MaxRequest > 0)
                 {
-                    MyLogfile.WriteLogData("_adv", "Step_1_DeActive:Redirect:" + mAdvObj.ConfirmLink);
+                    DataTable mTable_Count = mWapRegLog.Select(6, CurrentWapBase.MSISDN);
+                    if(mTable_Count.Rows.Count >=mAdvObj.MaxRequest)
+                    {
+                        CurrentWapBase.Response.Redirect(mAdvObj.GetRedirectLink, false);
+                        return string.Empty;
+                    }
+                }
+
+                if (mAdvObj.PassPercent > 0)
+                {
+                    DataTable mTable_Count = mWapRegLog.Select(8, mAdvObj.MapPartnerID.ToString());
+                    int RegCount = 0;
+                    if (mTable_Count.Rows.Count > 0)
+                        int.TryParse(mTable_Count.Rows[0][0].ToString(), out RegCount);
+
+                    if(mAdvObj.CheckPass(RegCount))
+                    {
+                        mAdvObj.InsertWapRegLog(CurrentWapBase.MSISDN, "Redirect:" + mAdvObj.GetRedirectLink);
+                        CurrentWapBase.Response.Redirect(mAdvObj.GetRedirectLink, false);
+                        return string.Empty;
+                    }
+                }
+
+                if (mAdvObj.mMethod != MyHBReport.Adv.Advertise.Method.PassVNPConfirm_Party &&
+                    mAdvObj.mMethod != MyHBReport.Adv.Advertise.Method.VNPConfirm_Party)
+                {
+                    mAdvObj.InsertWapRegLog(CurrentWapBase.MSISDN, string.Empty);
+                }
+          
+                if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.VNPConfirm ||
+                    mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.VNPConfirm_Party)
+                {
                     CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
                     return string.Empty;
-                }
-                else if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.VNPConfirm)
-                {
-                    MyLogfile.WriteLogData("_adv", "Step_1_VNPConfirm:Redirect:" + mAdvObj.ConfirmLink);
-                    CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
-                    return string.Empty;
-                }
+                }                   
                 else
                 {
                     if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.PassVNPConfirmFirstUse)
                     {
+                        #region MyRegion
                         Subscriber mSub = new Subscriber(mAdvObj.ConnectionName);
                         DataTable mTable = mSub.Select(1, CurrentWapBase.MSISDN);
                         if (mTable == null || mTable.Rows.Count < 1)
@@ -162,16 +159,16 @@ namespace MyLoad_Wap.Advertise
                         if (mTable != null && mTable.Rows.Count > 0)
                         {
                             //nếu đã từng sử dụng dịch vụ --> qua VNP confirm
-                            MyLogfile.WriteLogData("_adv", "Step_2:Redirect:" + mAdvObj.ConfirmLink);
                             CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
                             return string.Empty;
-                        }
+                        } 
+                        #endregion
                     }
 
                     if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.PassVNPConfirm ||
                         mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.PassVNPConfirmFirstUse)
                     {
-                        WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+                        #region MyRegion
                         string BeginDate = mAdvObj.BeginDate.ToString(MyConfig.DateFormat_InsertToDB);
                         string EndDate = mAdvObj.EndDate.ToString(MyConfig.DateFormat_InsertToDB);
 
@@ -180,16 +177,16 @@ namespace MyLoad_Wap.Advertise
                         {
                             if ((int)mTable.Rows[0][0] > mAdvObj.MaxReg)
                             {
-                                MyLogfile.WriteLogData("_adv", "Step_3:Redirect:" + mAdvObj.ConfirmLink);
                                 CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
                                 return string.Empty;
                             }
-                        }
+                        } 
+                        #endregion
                     }
 
                     if(mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.RegConfirmByWap)
                     {
-                        WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+                        #region MyRegion
                         string BeginDate = mAdvObj.BeginDate.ToString(MyConfig.DateFormat_InsertToDB);
                         string EndDate = mAdvObj.EndDate.ToString(MyConfig.DateFormat_InsertToDB);
 
@@ -198,22 +195,21 @@ namespace MyLoad_Wap.Advertise
                         {
                             if ((int)mTable.Rows[0][0] > mAdvObj.MaxReg)
                             {
-                                MyLogfile.WriteLogData("_adv", "Step_4:Redirect:" + mAdvObj.ConfirmLink);
                                 CurrentWapBase.Response.Redirect(mAdvObj.RedirectLink, false);
                                 return string.Empty;
                             }
                         }
-                        
+
                         //nếu là DK qua wap của dịch vụ mà phải confirm
-                        MyLogfile.WriteLogData("_adv", "Step_5:Redirect:" + mAdvObj.ConfirmLink);
                         CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
                         return string.Empty;
                         
+                        #endregion
                     }
 
                     if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.RegNotConfirmByWap)
                     {
-                        WapRegLog mWapRegLog = new WapRegLog(mAdvObj.ConnectionName);
+                        #region MyRegion
                         string BeginDate = mAdvObj.BeginDate.ToString(MyConfig.DateFormat_InsertToDB);
                         string EndDate = mAdvObj.EndDate.ToString(MyConfig.DateFormat_InsertToDB);
 
@@ -222,18 +218,49 @@ namespace MyLoad_Wap.Advertise
                         {
                             if ((int)mTable.Rows[0][0] > mAdvObj.MaxReg)
                             {
-                                MyLogfile.WriteLogData("_adv", "Step_6:Redirect:" + mAdvObj.ConfirmLink);
                                 CurrentWapBase.Response.Redirect(mAdvObj.RedirectLink, false);
                                 return string.Empty;
                             }
                         }
 
-                        MyLogfile.WriteLogData("_adv", "Step_7:Redirect:" + mAdvObj.NotConfirmLink);
                         //nếu là DK qua wap của dịch vụ mà phải confirm
                         CurrentWapBase.Response.Redirect(mAdvObj.NotConfirmLink, false);
-                        return string.Empty;
+                        return string.Empty; 
+                        #endregion
+                    }
+                    
+                    if (mAdvObj.mMethod == MyHBReport.Adv.Advertise.Method.RegNotConfirmByWap_11)
+                    {
+                        if (CurrentWapBase.MSISDN.StartsWith("8491"))
+                        {
+                            //nếu là đầu 9 thì chuyển đến trang confirm
+                            CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
+                            return string.Empty;
+                        }
+                        else
+                        {
+                            #region MyRegion
+                            string BeginDate = mAdvObj.BeginDate.ToString(MyConfig.DateFormat_InsertToDB);
+                            string EndDate = mAdvObj.EndDate.ToString(MyConfig.DateFormat_InsertToDB);
+
+                            DataTable mTable = mWapRegLog.Select(3, BeginDate, EndDate);
+                            if (mTable != null && mTable.Rows.Count > 0)
+                            {
+                                if ((int)mTable.Rows[0][0] > mAdvObj.MaxReg)
+                                {
+                                    CurrentWapBase.Response.Redirect(mAdvObj.ConfirmLink, false);
+                                    return string.Empty;
+                                }
+                            }
+
+                            //nếu là DK qua wap của dịch vụ mà phải confirm
+                            CurrentWapBase.Response.Redirect(mAdvObj.NotConfirmLink, false);
+                            return string.Empty;
+                            #endregion
+                        }
                     }
 
+                  
                     LoadNotConfirm mLoad = null;
                     if(string.IsNullOrEmpty(ReloadLink))
                     {
@@ -245,17 +272,16 @@ namespace MyLoad_Wap.Advertise
                     }
                     
                     string HTML = mLoad.GetHTML();
-                    MyLogfile.WriteLogData("_adv", "Step_8:Redirect:" + HTML);
                     return HTML;
                 }
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogData("_Error", ex.Source + "|" + ex.StackTrace + "|" + ex.Message);
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
                 LoadNotify mNotify = new LoadNotify();
                 return mNotify.GetHTML();
             }
         }
+
     }
 }

@@ -53,6 +53,38 @@ namespace MyHBReport.Adv
             /// </summary>
             public bool NotRedirectToVNP = false;
 
+            /// <summary>
+            /// Tránh tình trang KH đã hủy nhưng lại bị DK tiếp thì MaxRequest sẽ quy định được request bao nhiêu lần
+            /// </summary>
+            public int MaxRequest = 0;
+
+            /// <summary>
+            /// % sẽ pass sang 1 link khác.
+            /// </summary>
+            public int PassPercent = 0;
+            public string PassLink = string.Empty;
+            public string UsedLink = string.Empty;
+
+            /// <summary>
+            /// Link để ghi log cho các dịch vụ là của đối tác 
+            /// </summary>
+            public string LogMSISDNLink = string.Empty;
+
+
+            public string GetUsedLink
+            {
+                get
+                {
+                    if (!string.IsNullOrEmpty(UsedLink))
+                        return UsedLink;
+                    else if (!string.IsNullOrEmpty(NotConfirmLink))
+                        return NotConfirmLink;
+                    else if (!string.IsNullOrEmpty(ConfirmLink))
+                        return ConfirmLink;
+                    else
+                        return RedirectLink;
+                }
+            }
 
             public bool IsNull
             {
@@ -65,7 +97,62 @@ namespace MyHBReport.Adv
                 }
             }
 
+            /// <summary>
+            /// Lấy link cần redirect. nếu ko có link Redirect thì sẽ lấy confirmLink
+            /// </summary>
+            public string GetRedirectLink
+            {
+                get
+                {
+                    if (!string.IsNullOrEmpty(RedirectLink))
+                        return RedirectLink;
+                    else if (!string.IsNullOrEmpty(NotConfirmLink))
+                        return NotConfirmLink;
+                    else if (!string.IsNullOrEmpty(ConfirmLink))
+                        return ConfirmLink;
+                    else
+                        return UsedLink;
+                }
+            }
 
+            /// <summary>
+            /// Kiem tra xem co duoc pass du lieu hay khong
+            /// </summary>
+            /// <param name="RegCount"></param>
+            /// <returns></returns>
+            public bool CheckPass(int RegCount)
+            {
+                if (PassPercent <= 0)
+                    return false;
+
+                int RegMod = RegCount % 10;
+
+                switch(PassPercent)
+                {
+                    case 1:
+                        if (RegMod == 4)
+                            return true;
+                        break;
+                    case 2:
+                        if (RegMod == 5 || RegMod == 8)
+                            return true;
+                        break;
+                    case 3:
+                        if (RegMod == 4 || RegMod == 6 || RegMod == 9)
+                            return true;
+                        break;
+                    case 4:
+                        if (RegMod == 2 || RegMod == 4 || RegMod == 6 || RegMod == 9)
+                            return true;
+                        break;
+                    case 5:
+                        if (RegMod == 2 || RegMod == 4 || RegMod == 5 || RegMod == 7 || RegMod == 9)
+                            return true;
+                        break;
+
+                }
+                return false;
+            }
 
             public AdvertiseObject Convert(DataRow mRow)
             {
@@ -90,6 +177,12 @@ namespace MyHBReport.Adv
                 mObj.MapPartnerID = (int)mRow["MapPartnerID"];
                 mObj.RedirectDelay = (int)mRow["RedirectDelay"];
 
+                mObj.MaxRequest = (int)mRow["MaxRequest"];
+                mObj.PassPercent = (int)mRow["PassPercent"];
+
+                mObj.PassLink = mRow["PassLink"].ToString(); 
+                mObj.UsedLink = mRow["UsedLink"].ToString();
+                mObj.LogMSISDNLink = mRow["LogMSISDNLink"].ToString();
                 if (mRow.Table.Columns.Contains("ConnectionName"))
                 {
                     mObj.ConnectionName = mRow["ConnectionName"].ToString();
@@ -101,6 +194,37 @@ namespace MyHBReport.Adv
                         mObj.MapServiceID = (int)mRow["MapServiceID"];
                 }
                 return mObj;
+            }
+
+            /// <summary>
+            /// Update xuống wapreglog
+            /// </summary>
+            /// <param name="MSISDN"></param>
+            /// <param name="Note"></param>
+            /// <returns></returns>
+            public bool InsertWapRegLog(string MSISDN, string Note)
+            {
+                try
+                {
+                    WapRegLog mWapRegLog = new WapRegLog(this.ConnectionName);
+
+                    DataSet mSet = mWapRegLog.CreateDataSet();
+                    MyConvert.ConvertDateColumnToStringColumn(ref mSet);
+                    DataRow mRow = mSet.Tables[0].NewRow();
+                    mRow["MSISDN"] = MSISDN;
+                    mRow["PID"] = 0;
+                    mRow["PartnerID"] = this.MapPartnerID;
+                    mRow["CreateDate"] = DateTime.Now.ToString(MyConfig.DateFormat_InsertToDB);
+                    mRow["StatusID"] = (int)WapRegLog.Status.NewCreate;
+                    mRow["Note"] = Note;
+                    mSet.Tables[0].Rows.Add(mRow);
+
+                    return mWapRegLog.Insert(0, mSet.GetXml());
+                }
+                catch(Exception ex)
+                {
+                    throw ex;
+                }
             }
         }
 
@@ -125,13 +249,22 @@ namespace MyHBReport.Adv
             PassVNPConfirm = 2,
             [DescriptionAttribute("Vượt Confirm Vianphone với TB lần đầu SD")]
             PassVNPConfirmFirstUse = 3,
-            [DescriptionAttribute("DK Confirm qua wap DV")]
+            [DescriptionAttribute("Confirm qua wap dịch vụ")]
             RegConfirmByWap=4,
-            [DescriptionAttribute("DK Không Confirm qua wap DV")]
+            [DescriptionAttribute("Không Confirm qua wap dịch vụ")]
             RegNotConfirmByWap = 5,
+            [DescriptionAttribute("Vượt Confirm với DV của đối tác")]
+            PassVNPConfirm_Party = 6,
+            [DescriptionAttribute("Confirm bên Vinaphone với DV của đối tác")]
+            VNPConfirm_Party = 7,
+            [DescriptionAttribute("Không Confirm qua wap DV Với Số ĐT 11 Số")]
+            RegNotConfirmByWap_11 = 8,
+
+            [DescriptionAttribute("Không Confirm qua wap DV với TB lần đầu SD")]
+            RegNotConfirmByWapFirstUse = 9,
 
         }
-
+       
         MyExecuteData mExec;
         MyGetData mGet;
 

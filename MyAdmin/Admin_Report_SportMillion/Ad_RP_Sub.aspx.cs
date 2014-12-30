@@ -14,6 +14,7 @@ namespace MyAdmin.Admin_Report_SportMillion
     public partial class Ad_RP_Sub : System.Web.UI.Page
     {
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_RP_Sub));
         public int PageIndex = 1;
         RP_Sub mRP_Sub = new RP_Sub("SQLConnection_SportMillion");
         public DateTime ReportDate_Save = DateTime.MinValue;
@@ -70,7 +71,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
             }
             return string.Empty;
         }
@@ -114,7 +115,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
+                mLog.Error(ex);
             }
             return string.Empty;
         }
@@ -155,7 +156,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -183,7 +184,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
             if (IsRedirect)
             {
@@ -214,7 +215,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -289,7 +290,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SortError, "Chilinh");
+               mLog.Error(MyNotice.AdminError.SortError, true, ex);
             }
         }
 
@@ -301,7 +302,7 @@ namespace MyAdmin.Admin_Report_SportMillion
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SeachError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SeachError, true, ex);
             }
         }
 

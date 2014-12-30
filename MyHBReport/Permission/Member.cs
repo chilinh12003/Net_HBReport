@@ -14,6 +14,7 @@ namespace MyHBReport.Permission
     /// </summary>
     public class Member
     {
+
         MyExecuteData mExec = new MyExecuteData();
         MyGetData mGet = new MyGetData();
 
@@ -124,9 +125,8 @@ namespace MyHBReport.Permission
                 return Token.Equals(Token_Client);
                    
             }
-            catch (Exception ex)
+            catch
             {
-                MyLogfile.WriteLogError(ex);
                 return false;
             }
         }
@@ -204,9 +204,8 @@ namespace MyHBReport.Permission
             {
                 return int.Parse( MyConfig.GetKeyInConfigFile("MemberGroupID_Admin"));
             }
-            catch (Exception ex)
+            catch
             {
-                MyLogfile.WriteLogError(ex);
                 return 0;
             }
         }      

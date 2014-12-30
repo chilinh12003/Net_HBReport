@@ -80,5 +80,13 @@ namespace MySetting
                 return 50;
             }
         }
+
+        public static bool IsLoadDeviceOnStart
+        {
+            get
+            {
+                return false;
+            }
+        }
     }
 }

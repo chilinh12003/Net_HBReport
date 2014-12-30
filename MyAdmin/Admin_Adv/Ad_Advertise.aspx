@@ -41,8 +41,7 @@
                 </th>
                 <th>Dịch vụ
                 </th>
-                <th>Đối tác
-                </th>
+                <th>Đối tác</th>
                 <th style="width:150px;">ConfirmLink
                 </th>
                 <th style="width:150px;">NotConfirmLink
@@ -63,6 +62,8 @@
                 <th>
                     <asp:LinkButton runat="server" CssClass="Sort" ID="lbtn_Sort_6" CommandArgument="StatusName ASC" OnClick="lbtn_Sort_Click">Tình trạng</asp:LinkButton>
                 </th>
+                <th>Max Request</th>
+                <th>PP</th>
                 <th align="center" width="10">
                     <input type="checkbox" onclick="SelectCheckBox_All(this);" />
                 </th>
@@ -111,6 +112,12 @@
                         <td>
                             <%#Eval("StatusName")%>
                         </td>
+                          <td>
+                            <%#Eval("MaxRequest")%>
+                        </td>
+                          <td>
+                            <%#Eval("PassPercent")%>
+                        </td>
                         <td align="center" width="10">
                             <%#"<input type='checkbox' id='CheckAll_" + Container.ItemIndex.ToString() + "' value='" + Eval("AdvertiseID").ToString() + "' />"%>
                         </td>
@@ -158,6 +165,12 @@
                         </td>
                         <td>
                             <%#Eval("StatusName")%>
+                        </td>
+                          <td>
+                            <%#Eval("MaxRequest")%>
+                        </td>
+                          <td>
+                            <%#Eval("PassPercent")%>
                         </td>
                         <td align="center" width="10">
                             <%#"<input type='checkbox' id='CheckAll_" + Container.ItemIndex.ToString() + "' value='" + Eval("AdvertiseID").ToString() + "' />"%>

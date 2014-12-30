@@ -112,6 +112,33 @@ namespace MyAdmin.Admin_Adv {
         protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_RedirectLink;
         
         /// <summary>
+        /// tbx_PassLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_PassLink;
+        
+        /// <summary>
+        /// tbx_UsedLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_UsedLink;
+        
+        /// <summary>
+        /// tbx_LogMSISDNLink control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_LogMSISDNLink;
+        
+        /// <summary>
         /// tbx_BeginDate control.
         /// </summary>
         /// <remarks>
@@ -200,5 +227,23 @@ namespace MyAdmin.Admin_Adv {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_RedirectDelay;
+        
+        /// <summary>
+        /// tbx_MaxRequest control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_MaxRequest;
+        
+        /// <summary>
+        /// tbx_PassPercent control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText tbx_PassPercent;
     }
 }

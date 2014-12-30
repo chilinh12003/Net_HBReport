@@ -57,6 +57,15 @@ namespace MyHBReport.Adv
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Type">
+        /// <para>Type = 6: Đếm số thuê bao (Para_1 = MSISDN)</para>
+        /// <para>Type = 8: Đếm số thuê bao (Para_1 = PartnerID)</para>
+        /// </param>
+        /// <param name="Para_1"></param>
+        /// <returns></returns>
         public DataTable Select(int Type, string Para_1)
         {
             try
@@ -75,6 +84,7 @@ namespace MyHBReport.Adv
         /// </summary>
         /// <param name="Type">
         /// <para>Type = 3: Đếm số thuê bao (Para_1 = BeginDate, Para_2 = EndDate)</para>
+        /// <para>Type = 7: Đếm số thuê bao (Para_1 = MSISDN, Para_2 = PartnerID)</para>
         /// </param>
         /// <param name="Para_1"></param>
         /// <param name="Para_2"></param>

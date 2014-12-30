@@ -23,6 +23,7 @@ namespace Administrator.Admin
 
         public int PageIndex = 1;
         public GetRole mGetRole;
+        MyLog mLog = new MyLog(typeof(Ad_Permission));
         Role mRole = new Role();
 
         private void BindData()
@@ -72,7 +73,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.CheckPermissionError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.CheckPermissionError, true, ex);
                 return false;
             }
             return true;
@@ -109,7 +110,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.LoadDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.LoadDataError, true, ex);
             }
         }
 
@@ -195,7 +196,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SortError, "Chilinh");
+               mLog.Error(MyNotice.AdminError.SortError, true, ex);
             }
         }
 
@@ -247,7 +248,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.DeleteDataError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.DeleteDataError, true, ex);
             }
         }
      
@@ -260,7 +261,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SeachError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SeachError, true, ex);
             }
         }
 
@@ -273,7 +274,7 @@ namespace Administrator.Admin
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex, true, MyNotice.AdminError.SeachError, "Chilinh");
+                mLog.Error(MyNotice.AdminError.SeachError, true, ex);
             }
         }
                  

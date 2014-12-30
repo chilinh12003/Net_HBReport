@@ -14,14 +14,13 @@ namespace MyWap_Advertise.Adv
         public override void WriteHTML()
         {
             try
-            {
+            {               
                 LoadAdvertise mLoad = new LoadAdvertise(this);
                 Write(mLoad.GetHTML());
             }
             catch(Exception ex)
             {
-                MyLogfile.WriteLogError("_Error", ex, false, MyNotice.EndUserError.LoadDataError, "Chilinh");
-                MyLogfile.WriteLogData("_Error", ex.Message);
+                mLog.Error(ex);
             }
         }
     }

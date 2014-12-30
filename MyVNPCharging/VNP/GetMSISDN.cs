@@ -7,6 +7,8 @@ namespace MyVNPCharging.VNP
 {
     public class GetMSISDN
     {
+        static MyLog mLog = new MyLog(typeof(GetMSISDN));
+
         public static string GetMSISDN_URL_VNP
         {
             get
@@ -58,7 +60,7 @@ namespace MyVNPCharging.VNP
                 string ipaddress = MyCurrent.CurrentPage.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
                 if (string.IsNullOrEmpty(ipaddress))
                 {
-                    ipaddress = MyCurrent.CurrentPage.Request.ServerVariables["REMOTE_ADDR"];
+                    ipaddress = MyCurrent.CurrentPage.Request.ServerVariables["REMOTE_ADDR"] == null ? string.Empty : MyCurrent.CurrentPage.Request.ServerVariables["REMOTE_ADDR"];
                 }
                 ipaddress = ipaddress.Trim();
                 string[] arr = ipaddress.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
@@ -81,6 +83,7 @@ namespace MyVNPCharging.VNP
             }
             catch (Exception ex)
             {
+                mLog.Error(ex);
                 throw ex;
             }
         }
@@ -96,48 +99,57 @@ namespace MyVNPCharging.VNP
         /// <returns></returns>
         public bool CheckIP(int CheckType)
         {
-            string IPCheck = string.Empty;
-            string F5IPPattern = "(^(10)(\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$)|(^(113\\.185\\.)([1-9]|1[0-9]|2[0-9]|3[0-1])(\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])))";
-            string WAPGWIPPattern = "(^172.16.30.1[1-2]$)|(113.185.0.16)";
 
-            IPCheck = getRemoteAddr();
-
-            if (CheckType == 1)
+            try
             {
-                if (string.IsNullOrEmpty(IPCheck))
-                    return false;
-                string[] arr = IPCheck.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string item in arr)
-                {
-                    if (string.IsNullOrEmpty(item.Trim()))
-                    {
-                        return false;
-                    }
+              
+                string IPCheck = string.Empty;
+                string F5IPPattern = "(^(10)(\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])){3}$)|(^(113\\.185\\.)([1-9]|1[0-9]|2[0-9]|3[0-1])(\\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])))";
+                string WAPGWIPPattern = "(^172.16.30.1[1-2]$)|(113.185.0.16)";
 
-                    if (Regex.IsMatch(item.Trim(), F5IPPattern, RegexOptions.IgnoreCase))
-                        return true;
+                IPCheck = getRemoteAddr();
+
+                if (CheckType == 1)
+                {
+                    if (string.IsNullOrEmpty(IPCheck))
+                        return false;
+                    string[] arr = IPCheck.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string item in arr)
+                    {
+                        if (string.IsNullOrEmpty(item.Trim()))
+                        {
+                            return false;
+                        }
+
+                        if (Regex.IsMatch(item.Trim(), F5IPPattern, RegexOptions.IgnoreCase))
+                            return true;
+                    }
+                    return false;
                 }
-                return false;
+                else if (CheckType == 2)
+                {
+                    //Kiểm tra Ip qua WAPGate
+                    if (string.IsNullOrEmpty(IPCheck))
+                        return false;
+
+                    string[] arr = IPCheck.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string item in arr)
+                    {
+                        if (string.IsNullOrEmpty(item.Trim()))
+                        {
+                            return false;
+                        }
+                        if (Regex.IsMatch(item.Trim(), WAPGWIPPattern, RegexOptions.IgnoreCase))
+                            return true;
+                    }
+                    return false;
+                }
             }
-            else if (CheckType == 2)
+            catch (Exception ex)
             {
-                //Kiểm tra Ip qua WAPGate
-                if (string.IsNullOrEmpty(IPCheck))
-                    return false;
-
-                string[] arr = IPCheck.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string item in arr)
-                {
-                    if (string.IsNullOrEmpty(item.Trim()))
-                    {
-                        return false;
-                    }
-                    if (Regex.IsMatch(item.Trim(), WAPGWIPPattern, RegexOptions.IgnoreCase))
-                        return true;
-                }
-                return false;
+                mLog.Error(ex);
+                throw ex;
             }
-
             return false;
         }
 
@@ -147,15 +159,22 @@ namespace MyVNPCharging.VNP
             string Response = string.Empty;
             string GetFrom = "";
             string MSISDN_Return = string.Empty;
+            string remoteip = getRemoteAddr();
+            string msisdn = string.Empty;
+            string xipaddress = string.Empty;
+            string xforwarded = string.Empty;
+            string xwapmsisdn = string.Empty;
+            string userip = string.Empty;
+            
             try
             {
                 //Nhận thực qua MIN
-                string remoteip = getRemoteAddr();
-                string msisdn = MyCurrent.CurrentPage.Request.Headers["msisdn"];
-                string xipaddress = MyCurrent.CurrentPage.Request.Headers["X-ipaddress"];
-                string xforwarded = MyCurrent.CurrentPage.Request.Headers["X-Forwarded-For"];
-                string xwapmsisdn = MyCurrent.CurrentPage.Request.Headers["X-Wap-MSISDN"];
-                string userip = MyCurrent.CurrentPage.Request.Headers["User-IP"];
+                 remoteip = getRemoteAddr();
+                 msisdn = MyCurrent.CurrentPage.Request.Headers["msisdn"] == null ? string.Empty : MyCurrent.CurrentPage.Request.Headers["msisdn"];
+                 xipaddress = MyCurrent.CurrentPage.Request.Headers["X-ipaddress"] == null ? string.Empty : MyCurrent.CurrentPage.Request.Headers["X-ipaddress"];
+                 xforwarded = MyCurrent.CurrentPage.Request.Headers["X-Forwarded-For"] == null ? string.Empty : MyCurrent.CurrentPage.Request.Headers["X-Forwarded-For"];
+                 xwapmsisdn = MyCurrent.CurrentPage.Request.Headers["X-Wap-MSISDN"] == null ? string.Empty : MyCurrent.CurrentPage.Request.Headers["X-Wap-MSISDN"];
+                 userip = MyCurrent.CurrentPage.Request.Headers["User-IP"] == null ? string.Empty : MyCurrent.CurrentPage.Request.Headers["User-IP"];
                 string service = GetMSISDN_Servicename_VNP;
 
                 MyConfig.Telco mTelco = MyConfig.Telco.Nothing;
@@ -168,7 +187,7 @@ namespace MyVNPCharging.VNP
                     }
                     if (!string.IsNullOrEmpty(xipaddress) && xipaddress.StartsWith("10."))
                     {
-                        MSISDN_Return = MyCurrent.CurrentPage.Request.Headers["msisdn"];
+                        MSISDN_Return = msisdn;
 
                         MyCheck.CheckPhoneNumber(ref MSISDN_Return, ref mTelco, "84");
                         if (mTelco == MyConfig.Telco.Vinaphone)
@@ -184,7 +203,7 @@ namespace MyVNPCharging.VNP
                     }
                     if (!string.IsNullOrEmpty(userip) && userip.StartsWith("10."))
                     {
-                        MSISDN_Return = MyCurrent.CurrentPage.Request.Headers["X-Wap-MSISDN"];
+                        MSISDN_Return = xwapmsisdn;
 
                         MyCheck.CheckPhoneNumber(ref MSISDN_Return, ref mTelco, "84");
                         if (mTelco == MyConfig.Telco.Vinaphone)
@@ -210,22 +229,25 @@ namespace MyVNPCharging.VNP
 
                 string[] arr_ip = xforwarded.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
 
-                foreach (string item in arr_ip)
-                {
-                    MSISDN_Return = RequestVNP(msisdn, xipaddress, item.Trim(), xwapmsisdn, userip, remoteip, service);
-                    if (string.IsNullOrEmpty(MSISDN_Return))
-                        return MSISDN_Return;
-                }
+                //foreach (string item in arr_ip)
+                //{
+                //    MSISDN_Return = RequestVNP(msisdn, xipaddress, item.Trim(), xwapmsisdn, userip, remoteip, service);
+                //    if (string.IsNullOrEmpty(MSISDN_Return))
+                //        return MSISDN_Return;
+                //}
 
                 return MSISDN_Return;
             }
             catch (Exception ex)
             {
-                throw ex;
+                mLog.Error(ex);
+                return MSISDN_Return;
             }
             finally
             {
-                MyLogfile.WriteLogData("GET_MSISDN_VNP", "MSISDN_Return:" + MSISDN_Return + " || GetFrom:" + GetFrom);
+                //MyLogfile.WriteLogData("GET_MSISDN_VNP", "MSISDN_Return:" + MSISDN_Return + " || GetFrom:" + GetFrom);
+                //string Format = "remoteip:{0}|msisdn:{1}|xipaddress:{2}|xforwarded:{3}|xwapmsisdn:{4}|userip:{5}";
+                //mLog.Debug("HEADER---->" + string.Format(Format, new string[] { remoteip, msisdn, xipaddress, xforwarded, xwapmsisdn, userip }));
             }
         }
 
@@ -236,32 +258,33 @@ namespace MyVNPCharging.VNP
             string MSISDN_Return = string.Empty;
             try
             {
-                URL = GetMSISDN_URL_VNP + "?msisdn=" + msisdn + "&xipaddress=" + xipaddress + "&xforwarded=" + xforwarded + "&xwapmsisdn=" + xwapmsisdn + "&userip=" + userip + "&remoteip=" + remoteip + "&service=" + service;
+                //URL = GetMSISDN_URL_VNP + "?msisdn=" + msisdn + "&xipaddress=" + xipaddress + "&xforwarded=" + xforwarded + "&xwapmsisdn=" + xwapmsisdn + "&userip=" + userip + "&remoteip=" + remoteip + "&service=" + service;
 
-                Response = MyFile.ReadContentFromURL(URL);
+                //Response = MyFile.ReadContentFromURL(URL);
 
-                if (string.IsNullOrEmpty(Response))
-                    MSISDN_Return = string.Empty;
-                else
-                {
-                    string[] arr = Response.Split('|');
-                    if (arr.Length > 2)
-                        MSISDN_Return = arr[1];
-                    MyConfig.Telco mTelco = MyConfig.Telco.Nothing;
-                    MyCheck.CheckPhoneNumber(ref MSISDN_Return, ref mTelco, "84");
-                    if (mTelco != MyConfig.Telco.Vinaphone)
-                        MSISDN_Return = string.Empty;
-                }
+                //if (string.IsNullOrEmpty(Response))
+                //    MSISDN_Return = string.Empty;
+                //else
+                //{
+                //    string[] arr = Response.Split('|');
+                //    if (arr.Length > 2)
+                //        MSISDN_Return = arr[1];
+                //    MyConfig.Telco mTelco = MyConfig.Telco.Nothing;
+                //    MyCheck.CheckPhoneNumber(ref MSISDN_Return, ref mTelco, "84");
+                //    if (mTelco != MyConfig.Telco.Vinaphone)
+                //        MSISDN_Return = string.Empty;
+                //}
 
 
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError("Error_MIN_VNP", ex);
+                mLog.Error(ex);
+                throw ex;
             }
             finally
             {
-                MyLogfile.WriteLogData("GET_MSISDN_VNP", "URL_GET:" + URL + " || Response:" + Response + " || MSISDN_Return:" + MSISDN_Return + " || GetFrom:MIN ");
+                //MyLogfile.WriteLogData("GET_MSISDN_VNP", "URL_GET:" + URL + " || Response:" + Response + " || MSISDN_Return:" + MSISDN_Return + " || GetFrom:MIN ");
             }
             return MSISDN_Return;
         }

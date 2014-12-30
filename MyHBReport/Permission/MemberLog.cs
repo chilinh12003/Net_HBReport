@@ -191,8 +191,7 @@ namespace MyHBReport.Permission
             }
             catch (Exception ex)
             {
-                MyLogfile.WriteLogError(ex);
-                return false;
+                throw ex;
             }
         }
 

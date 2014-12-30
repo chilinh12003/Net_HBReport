@@ -13,11 +13,11 @@
     <label>
         Từ ngày:</label>
     <input type="text" runat="server" id="tbx_FromDate" style="width: 70px;" />
-    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_FromDate.ClientID %>    '),'dd/mm/yyyy',this)" />
+    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_FromDate.ClientID %>'),'dd/mm/yyyy',this)" />
     <label>
         Đến ngày:</label>
     <input type="text" runat="server" id="tbx_ToDate" style="width: 70px;" />
-    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_ToDate.ClientID %>    '),'dd/mm/yyyy',this)" />
+    <input type="button" value="..." onclick="displayCalendar(document.getElementById('<%=tbx_ToDate.ClientID %>'),'dd/mm/yyyy',this)" />
     <asp:Button runat="server" ID="btn_Search" Text="Tìm kiếm" OnClick="btn_Search_Click" />
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cph_Content" runat="server">
@@ -69,8 +69,8 @@
                     <td><%#((double)Eval("SubTotal")+(double)Eval("SubTotal_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubNew") +(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                    <td><%#((double)Eval("SubSMS")+(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                    <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubSMS")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubWAP")+(double)Eval("SubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("UnsubTotal")+(double)Eval("UnsubTotal_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("UnsubNew")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
@@ -100,8 +100,8 @@
                     <td><%#((double)Eval("SubTotal")+(double)Eval("SubTotal_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubActive")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubNew") +(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                    <td><%#((double)Eval("SubSMS")+(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
-                    <td><%#((double)Eval("SubWAP")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubSMS")).ToString(MyUtility.MyConfig.IntFormat)%></td>
+                    <td><%#((double)Eval("SubWAP")+(double)Eval("SubNew_Partner") ).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("SubOther")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("UnsubTotal")+(double)Eval("UnsubTotal_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>
                     <td><%#((double)Eval("UnsubNew")+(double)Eval("UnsubNew_Partner")).ToString(MyUtility.MyConfig.IntFormat)%></td>

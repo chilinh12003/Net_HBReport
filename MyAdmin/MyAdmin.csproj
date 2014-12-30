@@ -58,6 +58,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Lib\AntiXSS Library v4.2\NET35\AntiXSSLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="MyBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\MyLibrary\MyBase\bin\Debug\MyBase.dll</HintPath>
+    </Reference>
     <Reference Include="MyFamousMan">
       <HintPath>..\..\FamousMan\MyVOVTraffic\bin\Debug\MyFamousMan.dll</HintPath>
     </Reference>
@@ -107,6 +111,7 @@
     <Content Include="Admin_Adv\Ad_Advertise_Edit.aspx" />
     <Content Include="Admin_Adv\Ad_Service.aspx" />
     <Content Include="Admin_Adv\Ad_Service_Edit.aspx" />
+    <Content Include="Admin_Adv\CreatePassAPI.aspx" />
     <Content Include="Admin_CCare\Ad_History_MO_MT.aspx" />
     <Content Include="Admin_Control\Admin_Paging_VNP.ascx" />
     <Content Include="Admin_Report\Ad_MOByDay.aspx" />
@@ -114,6 +119,7 @@
     <Content Include="Admin_Report_FamousMan\Ad_RP_Sub_Partner.aspx" />
     <Content Include="Admin_Report_Mtraffic\Ad_RP_Sub.aspx" />
     <Content Include="Admin_Report_SportMillion\Ad_RP_Sub.aspx" />
+    <Content Include="APISync\SyncSub.asmx" />
     <Content Include="App_Data\AllowIP.xml" />
     <Content Include="CSS\bootstrap.css" />
     <Content Include="CSS\CheckInfo.css" />
@@ -264,6 +270,13 @@
     <Compile Include="Admin_Adv\Ad_Service_Edit.aspx.designer.cs">
       <DependentUpon>Ad_Service_Edit.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin_Adv\CreatePassAPI.aspx.cs">
+      <DependentUpon>CreatePassAPI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin_Adv\CreatePassAPI.aspx.designer.cs">
+      <DependentUpon>CreatePassAPI.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin_CCare\Ad_History_MO_MT.aspx.cs">
       <DependentUpon>Ad_History_MO_MT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -319,6 +332,10 @@
     </Compile>
     <Compile Include="Admin_Report_SportMillion\Ad_RP_Sub.aspx.designer.cs">
       <DependentUpon>Ad_RP_Sub.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="APISync\SyncSub.asmx.cs">
+      <DependentUpon>SyncSub.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Captcha.ashx.cs">
       <DependentUpon>Captcha.ashx</DependentUpon>
